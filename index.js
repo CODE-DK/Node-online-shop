@@ -13,12 +13,26 @@ app.engine('hbs', hbs.engine) // defind handlebars engine before usage
 app.set('view engine', 'hbs') // use handlebars engine
 app.set('views', 'views') // here we say handlebars where will store view. by default it is views folder
 
-app.get('/', (req, res) => {
-    res.render('index')
-})
+app.use(express.static('public'))
 
-app.get('/about', (req, res) => {
-    res.render('about')
+app.get('/', (req, res) => {
+    res.render('index', {
+        title: 'Главная страница',
+        isHome: true
+
+    })
+})
+app.get('/add', (req, res) => {
+    res.render('add', {
+        title: 'Добавить курс',
+        isAdd: true
+    })
+})
+app.get('/courses', (req, res) => {
+    res.render('courses', {
+        title: 'Курсы',
+        isCourses: true
+    })
 })
 
 const PORT = process.env.PORT || 3000
