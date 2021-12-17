@@ -6,6 +6,7 @@ const { extname } = require("path");
 const homeRoutes = require("./routes/home");
 const coursesRoutes = require("./routes/courses");
 const addRoutes = require("./routes/add");
+const cardRoutes = require("./routes/card");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(
 app.use("/", homeRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/add", addRoutes);
+app.use("/card", cardRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(3000, () => {
