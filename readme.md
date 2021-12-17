@@ -1,3 +1,8 @@
+### Links
+[fish terminal](https://fishshell.com/)
+[Matefialize](https://materializecss.com/)
+
 ### Kill process on port
-PID  -> lsof -t -i:<PORT>
-KILL -> kill -9 <PID>
+```
+kill -9 (lsof -t -i:3000)
+```
