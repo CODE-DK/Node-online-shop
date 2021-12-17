@@ -1,14 +1,40 @@
-const {Router} = require('express')
-const Course = require('../models/course')
-const router = Router()
+const { Router } = require("express");
+const Course = require("../models/course");
+const router = Router();
 
-router.get('/', async (req, res) => {
-    const courses = await Course.getAll()
-    res.render('courses', {
-        title: 'Курсы',
-        isCourses: true,
-        courses
-    })
-})
+router.get("/", async (req, res) => {
+  const courses = await Course.getAll();
+  res.render("courses", {
+    title: "Курсы",
+    isCourses: true,
+    courses,
+  });
+});
 
-module.exports = router
+router.post("/edit", async (req, res) => {
+  await Course.update(req.body);
+  return res.redirect("/courses");
+});
+
+router.get("/:id/edit", async (req, res) => {
+  if (!req.query.allow) {
+    return res.redirect("/");
+  }
+
+  const course = await Course.getById(req.params.id);
+
+  res.render("course-edit", {
+    title: `Редактировать ${course.title}`,
+    course,
+  });
+});
+
+router.get("/:id", async (req, res) => {
+  const course = await Course.getById(req.params.id);
+  res.render("course", {
+    title: `Курс ${course.title}`,
+    course,
+  });
+});
+
+module.exports = router;
