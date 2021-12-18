@@ -21,7 +21,7 @@ class Card {
       card.courses.push(course);
     }
 
-    card.price += course.price;
+    card.price += +course.price;
 
     return new Promise((resolve, reject) => {
       fs.writeFile(p, JSON.stringify(card), (err) => {
