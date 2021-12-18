@@ -18,7 +18,7 @@ app.engine("hbs", hbs.engine); // defind handlebars engine before usage
 app.set("view engine", "hbs"); // use handlebars engine
 app.set("views", "views"); // here we say handlebars where will store view. by default it is views folder
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(
   express.urlencoded({
     extended: false,
