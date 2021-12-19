@@ -43,6 +43,7 @@ app.use("/", require("./routes/home"));
 app.use("/courses", require("./routes/courses"));
 app.use("/add", require("./routes/add"));
 app.use("/card", require("./routes/cart"));
+app.use("/orders", require("./routes/orders"));
 
 const PORT = process.env.PORT || 3000;
 

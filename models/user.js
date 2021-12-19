@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { use } = require("../routes/orders");
 const course = require("./course");
 
 const user = Schema({
@@ -59,6 +60,11 @@ user.methods.removeFromCart = function (courseId) {
   }
 
   this.cart = { items };
+  return this.save();
+};
+
+user.methods.clearCart = function () {
+  this.cart = { items: [] };
   return this.save();
 };
 
