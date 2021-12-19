@@ -9,11 +9,6 @@ const {
 } = require("@handlebars/allow-prototype-access");
 const User = require("./models/user");
 
-const homeRoutes = require("./routes/home");
-const coursesRoutes = require("./routes/courses");
-const addRoutes = require("./routes/add");
-const cardRoutes = require("./routes/card");
-
 const app = express();
 
 const hbs = exphbs.create({
@@ -44,10 +39,10 @@ app.use(
   })
 );
 
-app.use("/", homeRoutes);
-app.use("/courses", coursesRoutes);
-app.use("/add", addRoutes);
-app.use("/card", cardRoutes);
+app.use("/", require("./routes/home"));
+app.use("/courses", require("./routes/courses"));
+app.use("/add", require("./routes/add"));
+app.use("/card", require("./routes/cart"));
 
 const PORT = process.env.PORT || 3000;
 
