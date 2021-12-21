@@ -45,6 +45,7 @@ app.use(
 
 //Middleware config
 app.use(require("./middleware/variables"));
+app.use(require("./middleware/user"));
 
 //Routes config
 app.use("/", require("./routes/home"));
