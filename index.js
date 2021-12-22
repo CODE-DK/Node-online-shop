@@ -1,16 +1,15 @@
 const express = require("express");
 const path = require("path");
 const csrf = require("csurf");
+const flash = require("connect-flash");
 const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
-const { extname } = require("path");
 const Handlebars = require("handlebars");
 const {
   allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
-const User = require("./models/user");
 
 //Property
 const SERVER_PORT = 3000;
@@ -46,6 +45,7 @@ app.use(
 
 //Middleware config
 app.use(csrf());
+app.use(flash());
 app.use(require("./middleware/variables"));
 app.use(require("./middleware/user"));
 
