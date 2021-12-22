@@ -10,11 +10,7 @@ const Handlebars = require("handlebars");
 const {
   allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
-
-//Property
-const SERVER_PORT = 3000;
-const SESSION_SECRET = "some secret value";
-const MONGODB_URI = "mongodb+srv://mongo:mongo@mern.azpfv.mongodb.net/shop";
+const env = require("./env"); //by default require try to find index.js file
 
 //App config
 const app = express();
@@ -32,11 +28,11 @@ app.use(express.urlencoded({ extended: false }));
 //Session config
 const mongoStore = new MongoStore({
   collection: "sessions",
-  uri: MONGODB_URI,
+  uri: env.MONGODB_URI,
 });
 app.use(
   session({
-    secret: SESSION_SECRET,
+    secret: env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: mongoStore,
@@ -61,11 +57,11 @@ app.use("/auth", require("./routes/auth"));
 async function start() {
   try {
     console.log("Connection to database...");
-    await mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+    await mongoose.connect(env.MONGODB_URI, { useNewUrlParser: true });
     console.log("Connection success!");
 
-    app.listen(SERVER_PORT, () => {
-      console.log(`Server is running on port ${SERVER_PORT}`);
+    app.listen(env.SERVER_PORT, () => {
+      console.log(`Server is running on port ${env.SERVER_PORT}`);
     });
   } catch (e) {
     console.log(e);
