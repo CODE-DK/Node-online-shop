@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const csrf = require("csurf");
 const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
@@ -44,6 +45,7 @@ app.use(
 );
 
 //Middleware config
+app.use(csrf());
 app.use(require("./middleware/variables"));
 app.use(require("./middleware/user"));
 
