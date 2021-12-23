@@ -2,6 +2,16 @@ const { Router } = require("express");
 const router = Router();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
+const env = require("../env");
+
+const transporter = nodemailer.createTransport({
+  service: env.EMAIL_SERVICE,
+  auth: {
+    user: env.EMAIL_USERNAME,
+    pass: env.EMAIL_PASSWORD
+  }
+});
 
 router.get("/login", async (req, res) => {
   res.render("auth/login", {
@@ -60,6 +70,11 @@ router.post("/register", async (req, res) => {
       });
       await user.save();
       res.redirect("/auth/login#login");
+
+      //Add email sending..
+      //Recomends add this after any redirects.. 
+      const sendEmailTo = require("../emails/registration");
+      await transporter.sendMail(sendEmailTo(email));
     }
   } catch (e) {
     console.log(e);
