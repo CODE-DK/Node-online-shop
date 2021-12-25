@@ -3,7 +3,7 @@ const router = Router();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const { registerValidator } = require("../utils/validatiors"); 
-const { validationResult } = require("express-validator/check");
+const { validationResult } = require("express-validator");
 
 router.get("/login", async (req, res) => {
   res.render("auth/login", {

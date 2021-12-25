@@ -53,6 +53,9 @@ app.use("/card", require("./routes/cart"));
 app.use("/orders", require("./routes/orders"));
 app.use("/auth", require("./routes/auth"));
 
+//NOTE: Error 404 middleware should be after all routes
+app.use(require("./middleware/error"));
+
 //App Starter
 async function start() {
   try {
