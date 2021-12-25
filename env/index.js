@@ -8,10 +8,4 @@ module.exports = {
   //Server
   SERVER_BASEURL: "http://localhost:3000",
   SERVER_PORT: 3000,
-
-  //Email
-  EMAIL_SERVICE: "gmail",
-  EMAIL_USERNAME: "",
-  EMAIL_PASSWORD: "",
-  EMAIL_ADDRESS: ""
 };
