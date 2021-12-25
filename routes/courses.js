@@ -2,6 +2,8 @@ const { Router } = require("express");
 const Course = require("../models/course");
 const router = Router();
 const auth = require("../middleware/auth");
+const { courseValidator } = require("../utils/validatiors");
+const { validationResult } = require("express-validator");
 
 router.get("/", async (req, res) => {
   const courses = await Course.find();
@@ -12,12 +14,21 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.post("/edit", auth, async (req, res) => {
+router.post("/edit", auth, courseValidator, async (req, res) => {
+  const errors = validationResult(req);
   const { id } = req.body;
-  delete req.body.id;
 
-  await Course.findByIdAndUpdate(id, req.body);
-  return res.redirect("/courses");
+  if (!errors.isEmpty()) {
+    res.status(422).redirect(`/courses/${id}/edit?allow=true`)
+  }
+  
+  try { 
+    delete req.body.id;
+    await Course.findByIdAndUpdate(id, req.body);
+    return res.redirect("/courses"); 
+  } catch(e) { 
+    console.log(e);
+  }
 });
 
 router.get("/:id/edit", auth, async (req, res) => {
