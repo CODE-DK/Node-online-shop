@@ -1,11 +1,5 @@
-module.exports = {
-  //Session
-  SESSION_SECRET: "some secret value",
-
-  //Mongodb
-  MONGODB_URI: "mongodb+srv://mongo:mongo@mern.azpfv.mongodb.net/shop",
-  
-  //Server
-  SERVER_BASEURL: "http://localhost:3000",
-  SERVER_PORT: 3000,
-};
+if (process.env.NODE_ENV === "prod") {
+  module.exports = require("./keys.prod");
+} else {
+  module.exports = require("./keys.dev");
+}
