@@ -23,6 +23,7 @@ app.engine("hbs", hbs.engine); // defind handlebars engine before usage
 app.set("view engine", "hbs"); // use handlebars engine
 app.set("views", "views"); // here we say handlebars where will store view. by default it is views folder
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.urlencoded({ extended: false }));
 
 //Session config
@@ -40,6 +41,7 @@ app.use(
 );
 
 //Middleware config
+app.use(require("./middleware/file").single("avatar"));
 app.use(csrf());
 app.use(flash());
 app.use(require("./middleware/variables"));
@@ -52,6 +54,7 @@ app.use("/add", require("./routes/add"));
 app.use("/card", require("./routes/cart"));
 app.use("/orders", require("./routes/orders"));
 app.use("/auth", require("./routes/auth"));
+app.use("/profile", require("./routes/profile")); 
 
 //NOTE: Error 404 middleware should be after all routes
 app.use(require("./middleware/error"));
