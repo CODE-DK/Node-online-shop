@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const csrf = require("csurf");
+const helmet = require("helmet");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
@@ -44,6 +45,7 @@ app.use(
 app.use(require("./middleware/file").single("avatar"));
 app.use(csrf());
 app.use(flash());
+app.use(helmet());
 app.use(require("./middleware/variables"));
 app.use(require("./middleware/user"));
 
