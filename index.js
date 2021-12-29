@@ -47,7 +47,7 @@ app.use(require("./middleware/file").single("avatar"));
 app.use(csrf());
 app.use(flash());
 app.use(helmet());
-app.use(compression());
+// app.use(compression());
 app.use(require("./middleware/variables"));
 app.use(require("./middleware/user"));
 
